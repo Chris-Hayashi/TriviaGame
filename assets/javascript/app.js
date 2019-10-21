@@ -12,25 +12,29 @@
 
 //Create a variable called unansweredCounter initialized to 0
 
-//Create a function called countDown that displays the time remaining
+//Create a function called countDown() that displays the time remaining
 
-//set timeRemaining to 30
+    //if timeRemaining is less than or equal to 0
 
-//decrement timeRemaining by 1
+        //call losePage()
 
-//display timeRemaining to index.html by using the id #timeRemaining
+    //decrement timeRemaining by 1
+
+    //display timeRemaining to index.html by using the id #timeRemaining
 
 //Create a function called displayQuestion
 
-//create a variable nextQuestion equal to the next question in questionArray
+    //create a variable nextQuestion equal to the next question in questionArray
 
-//Display the question on the screen by using the id #questionDisplayed
+    //Display the question on the screen by using the id #questionDisplayed
 
 //Create a function called displayAnswers
 
+    //
+
 //Create a function called questionPage
 
-    //call countDown()
+    //use setInterval to call countDown()
 
     //call displayQuestion()
 
@@ -38,13 +42,24 @@
 
 //Create a function called losePage
 
-    //
+    //display losing message
+
+    //display an image or gif
 
 //Create a function called winPage
+
+    //display winning message
+
+    //display an image or gif
 
 //Create an onClick event for the start button
 
     //delete the start button
 
+    //set timeRemaining to 30
+
     //call questionPage()
-//
+
+//Create an onClick event for #answers
+
+    //if ()
