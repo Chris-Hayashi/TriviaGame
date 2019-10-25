@@ -2,12 +2,22 @@
 var questionArray = [{  
        question:  "Who is the lead singer of Queen?",
        answers: ["Freddy Mercury", "answer2", "answer3", "answer4"],
-       correctAnswer: "Freddy Mercury" }];
-    // },
-        // "What is the largest selling album of all time?", "Who is the king of pop?", "Who is the king of rock?",  
-        //             "What year did Tupac Shakur die?", "What instrument is Carlos Santana known for?", "Which of these is not one of the judges for America's Got Talent?"
-        //             "Which singer used to bite the heads off snakes during his concerts?", "Who is the lead singer of Kiss?", "Which member of the Jackson 5 became a hit solo artist?(Hint: He also made the largest selling album of all time)"];
-
+       correctAnswer: "Freddy Mercury"
+    }, {
+       question: "What is the largest selling album of all time?",
+       answers: ["Hotel California", "The Wall", "Back in Black", "Thriller"],
+       correctAnswer: "Thriller"
+    }, {
+       question: "Who was the last king of pop?", 
+       answers: ["Frank Sinatra", "Michael Jackson", "Elvis Presley", "The Beatles"],
+       correctAnswer: "Michael Jackson"}
+    // }, {
+    //    question: "Who is the king of rock?", 
+    //    answers: ["Elvis Presley", ""] 
+    // }
+        // "What year did Tupac Shakur die?", "What instrument is Carlos Santana known for?", "Which of these is not one of the judges for America's Got Talent?"
+        // "Which singer used to bite the heads off snakes during his concerts?", "Who is the lead singer of Kiss?"
+];
 // //Create a variable called answerArray holding all the answers as objects (both correct and incorrect)
 // var answerArray = [
 //     {
@@ -30,14 +40,13 @@ var incorrectCounter = 0;
 //Create a variable called unansweredCounter initialized to 0
 var unansweredCounter = 0;
 
+var countDownInterval;
+
 //Create a function called countDown() that displays the time remaining
 function countDown() {
     
     //if timeRemaining is less than or equal to 0
     if (timeRemaining <= 0){
-        
-        //clearInterval
-        
 
         //call losePage()
         losePage();
@@ -94,13 +103,19 @@ function displayAnswers() {
 }
 //Create a function called questionPage
 function questionPage() {
+    //clear message
+    $("#message").empty();
+
 
     $("div").show();
+
+    //reset timer
+    timeRemaining = 30;
 
     $("#timeRemaining").text(timeRemaining + " seconds");
 
     //use setInterval to call countDown() every 1 second
-    setInterval(countDown, 1000);
+    countDownInterval = setInterval(countDown, 1000);
     
     //call displayQuestion()
     displayQuestion();
@@ -111,6 +126,9 @@ function questionPage() {
 }
 //Create a function called losePage
 function losePage() {
+    
+    //clear countDownInterval
+    clearInterval(countDownInterval);
     
     //Hide the questions and answers on the document
     $("div").hide();
@@ -129,6 +147,9 @@ function losePage() {
 }
 //Create a function called winPage
 function winPage() {
+
+    //Clear countDownInterval
+    clearInterval(countDownInterval);
 
     //Hide the questions and answers on the document
     $("div").hide();
@@ -175,14 +196,9 @@ $("#button").on("click", function() {
 });
 //Create an onClick event for #answers
 $(document).on("click", ".choice", function() {
-    console.log("onClick event is called");
-    console.log(this);
-    console.log("You picked " + $(this).val());
 
     //if the button clicked is the correct answer
     if ($(this).val() === questionArray[questionIndex].correctAnswer) {
-
-        console.log("if statement is called");
 
         //call  winPage()
         winPage();
