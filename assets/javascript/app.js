@@ -75,10 +75,13 @@ function displayAnswers() {
         //Create a variable for each answer in the array
         var answer = questionArray[questionIndex].answers[i];
 
-        //Create a new <p> tag pointed to by a variable named answerPointer
-        var answerPointer = $("<p>");
+        //Create a new <option> tag pointed to by a variable named answerPointer
+        var answerPointer = $("<option>");
 
-        //Store the answer in the text content of the <p> tag
+        //give a class named value equal to the answer to <option>
+        answerPointer.val(answer);
+
+        //Display the answer in the text content of the <p> tag
         answerPointer.text(answer);
 
         //Append answerPointer to #answers
@@ -101,9 +104,6 @@ function questionPage() {
     
     //call displayAnswers()
     displayAnswers();
-
-    //increment questionIndex
-    questionIndex++;
     
 }
 //Create a function called losePage
@@ -123,7 +123,11 @@ function losePage() {
 //Create a function called winPage
 function winPage() {
 
+    //Hide the questions and answers on the document
+    $("div").hide();
+
     //display winning message
+    $("#message").text("Correct!!!");
     
     //display an image or gif
     
@@ -163,17 +167,22 @@ $("#button").on("click", function() {
     
 });
 //Create an onClick event for #answers
-// $("#answers").on("click", function() {
+$("#answers").on("click", function() {
+    console.log("onClick event is called");
+    console.log(this);
+    console.log("You picked " + $(this).val());
 
+    //if the button clicked is the correct answer
+    if ($(this).val() === questionArray[questionIndex].correctAnswer) {
+
+        console.log("if statement is called");
+
+        //call  winPage()
+        winPage();
+    }
+    //if the button clicked is the incorrect answer
     
-//     //if the button clicked is the correct answer
-//     if (this.textContent == ) {}
-    
-//         //call  winPage()
-    
-//     //if the button clicked is the incorrect answer
-    
-//         //call losePage()
-// });
+        //call losePage()
+});
 
 startGame();
