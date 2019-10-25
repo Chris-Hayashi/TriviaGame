@@ -76,7 +76,10 @@ function displayAnswers() {
         var answer = questionArray[questionIndex].answers[i];
 
         //Create a new <option> tag pointed to by a variable named answerPointer
-        var answerPointer = $("<option>");
+        var answerPointer = $("<p>");
+
+        //Give each answer a class named choice
+        answerPointer.addClass("choice");
 
         //give a class named value equal to the answer to <option>
         answerPointer.val(answer);
@@ -109,7 +112,11 @@ function questionPage() {
 //Create a function called losePage
 function losePage() {
     
+    //Hide the questions and answers on the document
+    $("div").hide();
+
     //display losing message
+    $("#message").text("Better luck next time.");
     
     //display an image or gif
     
@@ -167,7 +174,7 @@ $("#button").on("click", function() {
     
 });
 //Create an onClick event for #answers
-$("#answers").on("click", function() {
+$(document).on("click", ".choice", function() {
     console.log("onClick event is called");
     console.log(this);
     console.log("You picked " + $(this).val());
@@ -181,8 +188,11 @@ $("#answers").on("click", function() {
         winPage();
     }
     //if the button clicked is the incorrect answer
-    
+    else {
+        
         //call losePage()
+        losePage();
+    }
 });
 
 startGame();
