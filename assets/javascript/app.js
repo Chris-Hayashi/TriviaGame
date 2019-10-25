@@ -37,6 +37,7 @@ function countDown() {
     if (timeRemaining <= 0){
         
         //clearInterval
+        
 
         //call losePage()
         losePage();
@@ -65,9 +66,23 @@ function displayQuestion() {
 //Create a function called displayAnswers
 function displayAnswers() {
 
+    //Clear the section tag using id answers
+    $("#answers").empty();
+
     //display each answer in the object in questionArray at questionIndex
     for (var i = 0; i < questionArray[questionIndex].answers.length; i++) {
-        
+
+        //Create a variable for each answer in the array
+        var answer = questionArray[questionIndex].answers[i];
+
+        //Create a new <p> tag pointed to by a variable named answerPointer
+        var answerPointer = $("<p>");
+
+        //Store the answer in the text content of the <p> tag
+        answerPointer.text(answer);
+
+        //Append answerPointer to #answers
+        $("#answers").append(answerPointer);
     }
 
 }
