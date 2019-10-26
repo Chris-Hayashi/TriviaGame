@@ -112,10 +112,11 @@ function questionPage() {
     
     if (questionIndex === questionArray.length) {
         finalPage();
+        return;
     }
 
     //Show the div tag
-    $("div").show();
+    $("#questionPage").show();
 
     //reset timer
     timeRemaining = 30;
@@ -145,10 +146,12 @@ function losePage() {
     clearInterval(countDownInterval);
     
     //Hide the questions and answers on the document
-    $("div").hide();
+    $("#questionPage").hide();
 
     //display losing message
     $("#message").text("Better luck next time.");
+
+    //display the correct answer
     
     //display an image or gif
     
@@ -171,7 +174,7 @@ function winPage() {
     clearInterval(countDownInterval);
 
     //Hide the questions and answers on the document
-    $("div").hide();
+    $("#questionPage").hide();
 
     //display winning message
     $("#message").text("Correct!!!");
@@ -182,20 +185,36 @@ function winPage() {
     questionIndex++;
     
     //use setTimeout to call questionPage after 5 sec
-    setTimeout(questionPage, 5000);
+    setTimeout(questionPage, 3000);
 }
 
 
 //Create a function called finalPage
 function finalPage() {
+
+    //Hide the questionPage
+    $("#questionPage").hide();
+
+    //Display the final message
     $("#message").text("All done, here's how you did!");
+
+    //display correctCounter
+    $("#message").append($("<p>").text("Correct Answers: " + correctCounter));
+    $("#message").append($("<p>").text("Incorrect Answers: " + incorrectCounter));
+    $("#message").append($("<p>").text("Unanswered: " + unansweredCounter));
+
+    $("#message").append("<br>");
+    $("#message").append($("<h2>").text("Start Over?"));
+
+    //display startButton
+    $("#start").show();
 }
 
 
 //Create a function called startGame
 function startGame() {
 
-    $("div").hide();
+    $("#questionPage").hide();
     
     $("#start").show();
 
@@ -213,6 +232,9 @@ $("#start").on("click", function() {
 
     //delete the start button
     $("#start").hide();
+
+    //reset questionIndex
+    questionIndex = 0;
 
     //set timeRemaining to 30
     timeRemaining = 30;
