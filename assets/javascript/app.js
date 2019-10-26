@@ -141,20 +141,23 @@ function losePage() {
 
     //increment incorrectCounter
     incorrectCounter++;
-
+    
     //clear countDownInterval
     clearInterval(countDownInterval);
     
     //Hide the questions and answers on the document
     $("#questionPage").hide();
-
+    
     //display losing message
-    $("#message").text("Better luck next time.");
-
+    $("#message").text("Incorrect.");
+    
     //display the correct answer
-    
+    $("#message").append($("<p>").text("The correct answer was: " + questionArray[questionIndex].correctAnswer));
+
     //display an image or gif
-    
+    $("#message").append("<br>");
+    $("#message").append($("<img>").attr("src", "assets/images/incorrectGif.gif"));
+
     //increment questionIndex
     questionIndex++;
     
@@ -180,6 +183,8 @@ function winPage() {
     $("#message").text("Correct!!!");
     
     //display an image or gif
+    $("#message").append("<br>" + "<br>");
+    $("#message").append($("<img>").attr("src", "assets/images/correctGif.gif"));
     
     //increment questionIndex
     questionIndex++;
@@ -202,6 +207,10 @@ function finalPage() {
     $("#message").append($("<p>").text("Correct Answers: " + correctCounter));
     $("#message").append($("<p>").text("Incorrect Answers: " + incorrectCounter));
     $("#message").append($("<p>").text("Unanswered: " + unansweredCounter));
+
+    //display finalGif
+    $("#message").append("<br>");
+    $("#message").append($("<img>").attr("src", "assets/images/finalGif.gif"));
 
     $("#message").append("<br>");
     $("#message").append($("<h2>").text("Start Over?"));
