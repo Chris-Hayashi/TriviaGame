@@ -15,15 +15,9 @@ var questionArray = [{
     //    question: "Who is the king of rock?", 
     //    answers: ["Elvis Presley", ""] 
     // }
-        // "What year did Tupac Shakur die?", "What instrument is Carlos Santana known for?", "Which of these is not one of the judges for America's Got Talent?"
+        // "What instrument is Carlos Santana known for?", "Which of these is not one of the judges for America's Got Talent?"
         // "Which singer used to bite the heads off snakes during his concerts?", "Who is the lead singer of Kiss?"
 ];
-// //Create a variable called answerArray holding all the answers as objects (both correct and incorrect)
-// var answerArray = [
-//     {
-
-//     }
-// ];
 
 //Create a variable called questionIndex initialized to 0
 var questionIndex = 0;
@@ -40,13 +34,18 @@ var incorrectCounter = 0;
 //Create a variable called unansweredCounter initialized to 0
 var unansweredCounter = 0;
 
+//Create a variable called countDownInterval for clearing setInterval()
 var countDownInterval;
 
-//Create a function called countDown() that displays the time remaining
+
+//Create a function called countDown() that decrements timeRemaining
 function countDown() {
     
     //if timeRemaining is less than or equal to 0
     if (timeRemaining <= 0){
+
+        //increment unansweredCounter
+        unansweredCounter++;
 
         //call losePage()
         losePage();
@@ -59,6 +58,7 @@ function countDown() {
     $("#timeRemaining").text(timeRemaining + " seconds");
 
 }
+
 
 //Create a function called displayQuestion
 function displayQuestion() {
@@ -101,17 +101,26 @@ function displayAnswers() {
     }
 
 }
+
+
 //Create a function called questionPage
 function questionPage() {
+
+    
     //clear message
     $("#message").empty();
+    
+    if (questionIndex === questionArray.length) {
+        finalPage();
+    }
 
-
+    //Show the div tag
     $("div").show();
 
     //reset timer
     timeRemaining = 30;
 
+    //display timeRemaining on html
     $("#timeRemaining").text(timeRemaining + " seconds");
 
     //use setInterval to call countDown() every 1 second
@@ -124,9 +133,14 @@ function questionPage() {
     displayAnswers();
     
 }
+
+
 //Create a function called losePage
 function losePage() {
-    
+
+    //increment incorrectCounter
+    incorrectCounter++;
+
     //clear countDownInterval
     clearInterval(countDownInterval);
     
@@ -145,8 +159,13 @@ function losePage() {
     setTimeout(questionPage, 5000);
     
 }
+
+
 //Create a function called winPage
 function winPage() {
+
+    //increment correctCounter
+    correctCounter++;
 
     //Clear countDownInterval
     clearInterval(countDownInterval);
@@ -165,27 +184,35 @@ function winPage() {
     //use setTimeout to call questionPage after 5 sec
     setTimeout(questionPage, 5000);
 }
+
+
+//Create a function called finalPage
+function finalPage() {
+    $("#message").text("All done, here's how you did!");
+}
+
+
 //Create a function called startGame
 function startGame() {
-    // $("div").attr("style", "display: none;");
+
     $("div").hide();
     
-    $("#button").show();
+    $("#start").show();
 
     var startButton = $("<button>");
 
     startButton.text("Start");
 
-    $("#button").append(startButton);
+    $("#start").append(startButton);
 
 }
-    //
+
 
 //Create an onClick event for the start button
-$("#button").on("click", function() {
+$("#start").on("click", function() {
 
     //delete the start button
-    $("#button").hide();
+    $("#start").hide();
 
     //set timeRemaining to 30
     timeRemaining = 30;
@@ -194,6 +221,8 @@ $("#button").on("click", function() {
     questionPage();
     
 });
+
+
 //Create an onClick event for #answers
 $(document).on("click", ".choice", function() {
 
@@ -203,6 +232,7 @@ $(document).on("click", ".choice", function() {
         //call  winPage()
         winPage();
     }
+
     //if the button clicked is the incorrect answer
     else {
         
