@@ -10,13 +10,28 @@ var questionArray = [{
     }, {
        question: "Who was the last king of pop?", 
        answers: ["Frank Sinatra", "Michael Jackson", "Elvis Presley", "The Beatles"],
-       correctAnswer: "Michael Jackson"}
-    // }, {
-    //    question: "Who is the king of rock?", 
-    //    answers: ["Elvis Presley", ""] 
-    // }
-        // "What instrument is Carlos Santana known for?", "Which of these is not one of the judges for America's Got Talent?"
-        // "Which singer used to bite the heads off snakes during his concerts?", "Who is the lead singer of Kiss?"
+       correctAnswer: "Michael Jackson"
+    }, {
+       question: "Who is the king of rock?", 
+       answers: ["Elvis Presley", "Carlos Santana", "Tim McGraw", "Billy Ray Cyrus"],
+       correctAnswer: "Elvis Presley" 
+    }, {
+       question: "What instrument is Carlos Santana known for?", 
+       answers: ["Piano", "Drums", "Guitar", "Harmonica"],
+       correctAnswer: "Guitar"
+    }, {
+       question: "Which of these is not one of the judges for America's Got Talent?",
+       answers: ["Simon Cowell", "Terry Crews", "Howie Mandel", "Julianne Hough"],
+       correctAnswer: "Terry Crews"
+    }, {
+        question: "Which singer bit the head off a bat during one of his concerts?",
+        answers: ["Ozzy Osbourne", "Steven Tyler", "Joe Eliott", "Axl Rose"],
+        correctAnswer: "Ozzy Osbourne"
+    }, {
+        question: "Who is the lead singer of Kiss?",
+        answers: ["Steven Tyler", "John Lennon", "Jimi Hendrix", "Gene Simmons"],
+        correctAnswer: "Gene Simmons"
+    }
 ];
 
 //Create a variable called questionIndex initialized to 0
@@ -212,6 +227,7 @@ function finalPage() {
     $("#message").append("<br>");
     $("#message").append($("<img>").attr("src", "assets/images/finalGif.gif"));
 
+    //ask user to start over
     $("#message").append("<br>");
     $("#message").append($("<h2>").text("Start Over?"));
 
