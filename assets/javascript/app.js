@@ -1,7 +1,7 @@
 //Create a variable called questionArray holding all the questions
 var questionArray = [{  
        question:  "Who is the lead singer of Queen?",
-       answers: ["Freddy Mercury", "answer2", "answer3", "answer4"],
+       answers: ["Freddy Mercury", "Vince Neil", "Dan Reynolds", "Sylvester Stallone"],
        correctAnswer: "Freddy Mercury"
     }, {
        question: "What is the largest selling album of all time?",
