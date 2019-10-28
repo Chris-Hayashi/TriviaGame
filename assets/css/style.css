@@ -12,3 +12,12 @@ body {
     color: white;
 }
 
+#answers {
+    text-align: center;
+}
+
+.choice:hover {
+    color: black;
+    background-color: white;
+}
+

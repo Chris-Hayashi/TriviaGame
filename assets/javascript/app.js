@@ -8,7 +8,7 @@ var questionArray = [{
        answers: ["Hotel California", "The Wall", "Back in Black", "Thriller"],
        correctAnswer: "Thriller"
     }, {
-       question: "Who was the last king of pop?", 
+       question: "Who was the king of pop?", 
        answers: ["Frank Sinatra", "Michael Jackson", "Elvis Presley", "The Beatles"],
        correctAnswer: "Michael Jackson"
     }, {
@@ -41,13 +41,13 @@ var questionIndex = 0;
 var timeRemaining = 30;
 
 //Create a variable called correctCounter initialized to 0
-var correctCounter = 0;
+var correctCounter;
 
 //Create a variable called incorrectCounter initialized to 0
-var incorrectCounter = 0;
+var incorrectCounter;
 
 //Create a variable called unansweredCounter initialized to 0
-var unansweredCounter = 0;
+var unansweredCounter;
 
 //Create a variable called countDownInterval for clearing setInterval()
 var countDownInterval;
@@ -59,8 +59,8 @@ function countDown() {
     //if timeRemaining is less than or equal to 0
     if (timeRemaining <= 0){
 
-        //increment unansweredCounter
-        unansweredCounter++;
+        // //increment unansweredCounter
+        // unansweredCounter++;
 
         //call losePage()
         losePage();
@@ -100,7 +100,7 @@ function displayAnswers() {
         var answer = questionArray[questionIndex].answers[i];
 
         //Create a new <option> tag pointed to by a variable named answerPointer
-        var answerPointer = $("<p>");
+        var answerPointer = $("<span>");
 
         //Give each answer a class named choice
         answerPointer.addClass("choice");
@@ -112,7 +112,7 @@ function displayAnswers() {
         answerPointer.text(answer);
 
         //Append answerPointer to #answers
-        $("#answers").append(answerPointer);
+        $("#answers").append($("<p>").html(answerPointer));
     }
 
 }
@@ -154,8 +154,8 @@ function questionPage() {
 //Create a function called losePage
 function losePage() {
 
-    //increment incorrectCounter
-    incorrectCounter++;
+    // //increment incorrectCounter
+    // incorrectCounter++;
     
     //clear countDownInterval
     clearInterval(countDownInterval);
@@ -164,14 +164,26 @@ function losePage() {
     $("#questionPage").hide();
     
     //display losing message
-    $("#message").text("Incorrect.");
+    if (timeRemaining === 0) {
+        unansweredCounter++;
+        $("#message").text("You ran out of time.");
+    }
+    else {
+        incorrectCounter++;
+        $("#message").text("Incorrect.");
+    }
     
     //display the correct answer
     $("#message").append($("<p>").text("The correct answer was: " + questionArray[questionIndex].correctAnswer));
 
     //display an image or gif
     $("#message").append("<br>");
-    $("#message").append($("<img>").attr("src", "assets/images/incorrectGif.gif"));
+    if (timeRemaining === 0) {
+        $("#message").append($("<img>").attr("src", "assets/images/noTimeGif.gif"));
+    }
+    else {
+        $("#message").append($("<img>").attr("src", "assets/images/incorrectGif.gif"));
+    }
 
     //increment questionIndex
     questionIndex++;
@@ -263,6 +275,11 @@ $("#start").on("click", function() {
 
     //set timeRemaining to 30
     timeRemaining = 30;
+
+    //initialize counters to 0
+    correctCounter = 0;
+    incorrectCounter = 0;
+    unansweredCounter = 0;
     
     //call questionPage()
     questionPage();
